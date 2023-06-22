@@ -2,6 +2,9 @@ package personalSolution;
 
 import java.awt.*;
 
+/**
+ * CD : Couleur et Distances
+ */
 public class CD {
     private Color color;
     private long distances;
