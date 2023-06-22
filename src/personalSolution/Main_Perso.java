@@ -13,6 +13,10 @@ public class Main_Perso {
 
     public static void main(String[] args) {
 
+
+        /*
+        Lire l'image, initialisation.
+         */
         String fichier = "originale.jpg";
         int nb_couleurs = 15;
         String file_name = "./bi_limite_"+nb_couleurs+".png";
@@ -35,6 +39,9 @@ public class Main_Perso {
         }
 
 
+        /*
+        Créer trois Map correspondant respectivement à R, G et B, et initialiser les clés dans la plage de 0 à 255.
+         */
         HashMap<Integer, Integer> red_map = new HashMap<Integer, Integer>();
         HashMap<Integer, Integer> blue_map = new HashMap<Integer, Integer>();
         HashMap<Integer, Integer> green_map = new HashMap<Integer, Integer>();
@@ -45,16 +52,24 @@ public class Main_Perso {
             green_map.put(i,0);
         }
 
+        /*
+        Analyser les valeurs RGB de chaque pixel de l'image et ajouter le nombre d'occurrences correspondant
+        dans les Maps respectives.
+        Le nombre de pixels associés à chaque valeur de R, G ou B.
+         */
         for(int x = 0; x < bi.getWidth(); x++){
             for(int y = 0; y < bi.getHeight(); y++){
                 int[] rgbs = Outil.analyseRGB(bi.getRGB(x,y));
-                red_map.put(rgbs[0],red_map.get(rgbs[0]) + 1);
-                green_map.put(rgbs[1],green_map.get(rgbs[1]) + 1);
-                blue_map.put(rgbs[2],blue_map.get(rgbs[2]) + 1);
+                red_map.put(rgbs[0], red_map.get(rgbs[0]) + 1);
+                green_map.put(rgbs[1], green_map.get(rgbs[1]) + 1);
+                blue_map.put(rgbs[2], blue_map.get(rgbs[2]) + 1);
             }
         }
 
-
+        /*
+        En fonction du nombre de couleurs, obtenir de manière aléatoire les valeurs de x n fois
+        et les stocker dans une liste pour une utilisation lors de l'évalution.
+         */
         ArrayList<Integer> x_reds = new ArrayList<>();
         ArrayList<Integer> x_greens = new ArrayList<>();
         ArrayList<Integer> x_blues = new ArrayList<>();
@@ -65,11 +80,16 @@ public class Main_Perso {
         }
 
 
+        //Pas
         int dx = 2;
+        //Efficacité d'apprentissage
         int alpha = 2;
+        //Nb d'iterations
         int epoch = 100;
 
-
+        /*
+        Evalution
+         */
         for(int fois = 0 ; fois < epoch ; fois++){
             System.out.println("--Epoch"+fois+"--");
 
@@ -91,6 +111,9 @@ public class Main_Perso {
 
         ArrayList<CD> cds = new ArrayList<CD>();
 
+        /*
+        Combinaisons, Calculer la distance pour chaque combinaison.
+         */
         for(int r : x_reds){
             for(int g : x_greens){
                 for(int b : x_blues){
@@ -106,6 +129,9 @@ public class Main_Perso {
             }
         }
 
+        /*
+        Tri, placer la combinaison avec la distance minimale au début du tableau.
+         */
         cds.sort(new Comparator<CD>() {
             @Override
             public int compare(CD o1, CD o2) {
@@ -113,13 +139,18 @@ public class Main_Perso {
             }
         });
 
+        /*
+        Selon le nombre de couleurs, choisir les n premières couleurs
+         */
         ArrayList<Color> colors = new ArrayList<Color>();
-
         for (int i = 0; i < nb_couleurs; i++){
             colors.add(cds.get(i).getColor());
         }
 
-
+        /*
+        Pour chaque pixel de l'image, choisir la couleur de la liste qui est la plus proche en termes de distance,
+        et la remplir dans l'image à écrire.
+        */
         BufferedImage bi_limite = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_3BYTE_BGR);
 
         for(int x = 0; x < bi.getWidth();x++){
@@ -141,6 +172,9 @@ public class Main_Perso {
             }
         }
 
+        /*
+        Enregistrer l'image
+         */
         try {
             ImageIO.write(bi_limite, "PNG", new File(file_name));
         } catch (IOException e) {
@@ -149,6 +183,16 @@ public class Main_Perso {
 
     }
 
+    /**
+     * Selon la Map, mettre à jour les valeurs à l'intérieur de list_x en utilisant la méthode de descente de gradient,
+     * afin de minimiser autant que possible la distance finale.
+     * (la distance fait référence à la distance entre les valeurs des éléments de list_x et les valeurs dans l'histogramme)
+     * @param map l’histogramme de la valeur de R, G ou B
+     * @param x_list le tableau contenant les valeurs de la solution locale optimale
+     * @param dx le pas
+     * @param index_x l'indice de list_x, utilisé pour parcourir tous les éléments de list_x
+     * @param alpha l'efficacité d'apprentissage
+     */
     private static void evalution(HashMap<Integer, Integer> map, ArrayList<Integer> x_list, int dx, int index_x, int alpha) {
         int x = x_list.get(index_x);
 
