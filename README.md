@@ -126,7 +126,7 @@ la liste et d'écrire la couleur ayant la distance minimale dans la
 nouvelle image.
 
 ## Quelques pistes pour améliorer ma solution...?
-None...en fait, mon algorithme de base présente un problème,
+Non...en fait, mon algorithme de base présente un problème,
 car lors de la comparaison des couleurs, il est nécessaire de les comparer
 individuellement en fonction des valeurs de R, G et B. Même si je
 choisis la couleur la plus représentative avec une valeur R identique
@@ -370,7 +370,7 @@ Par conséquent, lorsque ces valeurs changent, les
 couleurs peuvent subir des changements importants.
 
 ## Piste d'amélioration possible
-None...Comme je l'ai mentionné précédemment,
+Non...Comme je l'ai mentionné précédemment,
 mon algorithme présente des problèmes car il prend en
 compte les valeurs globales lors du calcul, et le temps
 d'exécution augmente de manière cubique avec le nombre de couleurs.
