@@ -168,7 +168,7 @@ public class KMeans {
 
         // Ecriture de l'image
         try {
-            ImageIO.write(image, "png", new File("resources/out/perroquet_small.png"));
+            ImageIO.write(image, "png", new File("resources/out/perroquet_small_"+ nombreClusters+".png"));
         } catch (IOException e) {
             System.out.println("Impossible d'écrire l'image");
             System.exit(1);
