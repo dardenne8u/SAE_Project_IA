@@ -136,7 +136,8 @@ purement noires, elles peuvent sembler noires à nos yeux.
 Un autre problème est que les images générées par ma solution 
 ne sont pas assez stables.
 
-Images avec 10 couleurs
+**Images avec 10 couleurs:**
+
 <img src="../../resources/personalSolution/test_perso/10_1_mario_small.png" width="200" height="auto" alt="mario_small" style="display: block"/>
 <img src="../../resources/personalSolution/test_perso/10_2_mario_small.png" width="200" height="auto" alt="mario_small" style="display: block"/>
 <img src="../../resources/personalSolution/test_perso/10_mario_small.png" width="200" height="auto" alt="mario_small" style="display: block"/>
@@ -149,3 +150,10 @@ déterminées par les trois valeurs de R, G et B combinées.
 Par conséquent, lorsque ces valeurs changent, les 
 couleurs peuvent subir des changements importants.
 
+## Piste d'amélioration possible
+None...Comme je l'ai mentionné précédemment, 
+mon algorithme présente des problèmes car il prend en 
+compte les valeurs globales lors du calcul, et le temps 
+d'exécution augmente de manière cubique avec le nombre de couleurs.
+Si je souhaite améliorer l'algorithme, il peut être nécessaire de
+réécrire le programme depuis le début.
