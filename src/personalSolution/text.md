@@ -85,7 +85,7 @@ La méthode que j'ai envisagée consiste à utiliser l'algorithme de descente de
 Tout d'abord, on obtient aléatoirement les valeurs de ***x1*** et ***x2***. 
 Ensuite, en fixant la valeur de ***x2***, on calcule Distance(***x1***+dx) et 
 Distance(***x1***-dx), puis on choisit la tendance qui réduit la distance, 
-pareil pour x2.
+pareil pour ***x2***.
 
 Ce méthode est applicable lorsque l'on souhaite trouver **n** chiffres les plus représentatifs.
 
@@ -99,7 +99,7 @@ pour calculer la distance entre deux images ?
 ***Distance(im1, im2) = Σ (p1,p2∈pixels) (R(p1) − R(p2))² + (G(p1) − G(p2))² + (B(p1) − B(p2))²***
 
 Nous pouvons effectivement minimiser les valeurs des trois parties : 
-(R(p1) - R(p2))², (G(p1) - G(p2))² et (B(p1) - B(p2))², 
+***(R(p1) - R(p2))²***, ***(G(p1) - G(p2))²*** et ***(B(p1) - B(p2))²***, 
 afin de réduire au maximum la distance.
 
 Supposons que le nombre de couleurs soit de deux. 
