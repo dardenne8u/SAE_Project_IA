@@ -137,12 +137,125 @@ solutions partielles optimales ne sont pas optimales globalement.
 
 ## Principe de la solution
 
+Le principe de la solution est de réduit le nombre de couleur en gardant l'image
+la plus synthétique possible. Pour cela, on va utiliser la méthode de K-means.
+
+Pour cela, on utilise la classe point qui représente un pixel dans l'image.
+Grâce à cette liste de points on va pouvoir faire un regroupement de chaque point
+avec son centroid le plus porche.
+
+Le centroid est un point qui représente le centre d'un groupe de point.
 
 
 ## Algorithme de la solution
+
+```
+Algo K-Means
+début
+    tant que non(fini) faire
+        pour chaque cluster faire
+            reset(centroid)
+        fin pour
+        
+        pour chaque point faire
+            pour chaque cluster faire
+                distance <- distance(point, centroid)
+                si distance < min_distance alors
+                    min_cluster = cluster
+                    min_distance = distance
+                fin si
+            fin pour
+            add(min_cluster, point)
+        fin pour
+        
+        pour chaque cluster faire
+            centroid <- barycentre(cluster)
+        fin pour
+        
+        fini <- old_cout > cout
+    fin tant que
+fin
+```
+
 ## Conception
+### Diagramme de classe
+![dia_class](resources/saeSolution/diagClasse.png)
+### Diagramme de séquence
+![dia_seq](resources/saeSolution/diagSequence.png)
+
 ## Comment lancer le programme
+
+Le programme contient le chemin de l'image en clair dans le code
+ainsi que le chemin de sortie, par défaut KMeans applique son algorithme
+sur l'image du perroquet (resources/animaux/perroquet_small.png)
+et sort l'image dans un dossier resources/out/perroquel_small_nbCouleurs.png)
+
+Pour lancer le programme il suffit de s'assurer qu'un dossier out existe
+dans resources et de lancer le main de la classe KMeans.
+
+```java KMeans [nbCouleurs]```
+
+Le nombre de couleur par défaut est de 10.
+
 ## Piste d'amélioration
+
+Changer la condition de fin. Dans mon cas l'algorithme s'arrête dès
+que le cout augmente, cependant le fait qu'il monte ne signifie pas
+forcément que l'algorithme est terminé. Il faudrait donc trouver une
+autre condition de fin. Pour permettre à l'algorithme d'avoir un cout qui monte
+si ça lui permet de redescendre.
+
+Améliorer la rapidité de l'algorithme, trouver une solution qui permettrait
+de réduire le temps de calcul. De chaque cluster. Plus il y a de couleurs
+plus le temps de calcul prends du temps.
 
 
 # Tests
+
+## Test de la solution de la SAE
+
+### Image utilisé
+![perroquet](resources/animaux/perroquet_small.png)
+
+J'utilisais cette image pour mes tests, elle m'a semblé la plus complexe
+dû à son nombre de couleur et aux détails qu'il y avait
+
+### Image généré avec 8 couleurs
+![perroquet_8](resources/saeSolution/perroquet_small_8.png)
+
+La plus grosse difficulté semble être l'arrière plan
+de l'image, les branches ont perdus leurs détails cependant
+elles restent reconnaissable.
+
+### Image généré avec 16 couleurs
+![perroquet_16](resources/saeSolution/perroquet_small_16.png)
+
+Le perroquet a plus de détail et l'arrière plan aussi.
+L'image généré ressemble à une image dans un cartoon.
+
+### Image généré avec 32 couleurs
+![perroquet_32](resources/saeSolution/perroquet_small_32.png)
+
+A partir de 32 coulleurs le perroquet semble bien représenter l'original
+et l'arrière plan commence à avoir des détails. Tels que les branches.
+
+
+### Graphique fait sur l'algorithme
+![graph](resources/saeSolution/graphiqueTestTemp.png)
+
+Le graphique représente le temps de calcul de l'algorithme en fonction
+du nombre de couleur. On peut voir que le temps de calcul augmente
+de manière linéaire.
+
+### Manière de relancer mes tests
+
+Pour relancer mes tests il suffit de lancer le fichier
+de test ayant pour chemin test/saeSolution/TestKMeans.java
+
+### Conclusion
+
+L'algorithme de K-Means est un algorithme qui permet de réduire le nombre
+de couleur d'une image. Cependant il est très gourmand en temps de calcul
+et il est difficile de trouver une condition de fin qui permettrait
+de réduire le temps de calcul.
+
