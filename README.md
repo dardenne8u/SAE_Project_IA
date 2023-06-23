@@ -100,7 +100,7 @@ pour calculer la distance entre deux images ?
 ***Distance(im1, im2) = Σ (p1,p2∈pixels) (R(p1) − R(p2))² + (G(p1) − G(p2))² + (B(p1) − B(p2))²***
 
 Nous pouvons effectivement minimiser les valeurs des trois parties :
-(R(p1) - R(p2))², (G(p1) - G(p2))² et (B(p1) - B(p2))²,
+***(R(p1) - R(p2))²***, ***(G(p1) - G(p2))²*** et ***(B(p1) - B(p2))²***,
 afin de réduire au maximum la distance.
 
 Supposons que le nombre de couleurs soit de deux.

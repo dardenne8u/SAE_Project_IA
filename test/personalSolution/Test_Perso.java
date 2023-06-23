@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Test_Perso {
 
     public static void main(String[] args) {
+
         ArrayList<String> list_fichier_in = new ArrayList<>();
         list_fichier_in.add("mario_small.png");
         list_fichier_in.add("ours.png");
@@ -13,6 +14,9 @@ public class Test_Perso {
         list_fichier_in.add("van-Gogh-Night_small.png");
 
         int nbColors = 10;
+
+        nbColors = Integer.parseInt(args[0]);
+
         for(String fichier_in : list_fichier_in){
             String[] pargs = new String[3];
             pargs[0] = fichier_in;

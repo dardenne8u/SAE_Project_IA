@@ -91,7 +91,7 @@ public class Main_Perso {
         Evalution
          */
         for(int fois = 0 ; fois < epoch ; fois++){
-//            System.out.println("--Epoch"+fois+"--");
+            System.out.println("--Epoch"+fois+"--");
 
             for(int index_x = 0; index_x < nb_couleurs ; index_x++){
                 //Red
