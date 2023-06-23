@@ -54,9 +54,6 @@ cette couleur à notre image de sortie.
 
 ![dia_sequence](../../resources/personalSolution/rapport/sequence.png)
 
-Par exemple, dans le cas de deux couleurs, 
-**list_red** (dans Main_Perso c'est **x_reds**) contiendra deux valeurs aléatoires de x.
-
 Maintenant, supposons que notre image ne comporte qu'un seul channel R 
 et que notre objectif est de trouver les **n** couleurs 
 les plus représentatives, les **n** valeurs entre 0 et 255.
@@ -74,28 +71,28 @@ qui correspondra au chiffre le plus représentatif.
 
 Cependant, lorsque nous avons deux chiffres les plus représentatifs, 
 la situation devient plus complexe. Supposons que les deux chiffres 
-les plus représentatifs soient respectivement 2 (x1) et 3 (x2). 
+les plus représentatifs soient respectivement 2 (***x1***) et 3 (***x2***). 
 Dans ce cas, le calcul de la distance devient 
 Distance=(1-2)²+(1-2)²+(2-2)²+(3-3)²+(4-3)²+(9-3)², 
-c'est-à-dire Distance=(1-x1)²+(1-x1)²+(2-x1)²+(3-x2)²+(4-x2)²+(9-x2)².
+c'est-à-dire Distance=(1-***x1***)²+(1-***x1***)²+(2-***x1***)²+(3-***x2***)²+(4-***x2***)²+(9-***x2***)².
 
 Bien sûr, ici 2 et 3 ne sont certainement pas les solutions optimales, 
 il est donc nécessaire de trouver une méthode pour ajuster les valeurs de 
-x1(2) et x2(3) de manière à minimiser la somme des distances par rapport 
+***x1*** et ***x2*** de manière à minimiser la somme des distances par rapport 
 aux autres données de l'histogramme monochrome.
 
 La méthode que j'ai envisagée consiste à utiliser l'algorithme de descente de gradient.
-Tout d'abord, on obtient aléatoirement les valeurs de x1 et x2. 
-Ensuite, en fixant la valeur de x2, on calcule Distance(x1+dx) et 
-Distance(x1-dx), puis on choisit la tendance qui réduit la distance, 
+Tout d'abord, on obtient aléatoirement les valeurs de ***x1*** et ***x2***. 
+Ensuite, en fixant la valeur de ***x2***, on calcule Distance(***x1***+dx) et 
+Distance(***x1***-dx), puis on choisit la tendance qui réduit la distance, 
 pareil pour x2.
 
-Ce méthode est applicable lorsque l'on souhaite trouver n nombres les plus représentatifs.
+Ce méthode est applicable lorsque l'on souhaite trouver **n** chiffres les plus représentatifs.
 
-Ensuite, on peut effectuer la même procédure pour le Map du channel G et le Map du channel B, 
+Plus, on peut effectuer la même procédure pour le Map du channel G et le Map du channel B, 
 en récupérant les données et en les sauvegardant dans les liste.
 
-Pourquoi avons-nous besoin de trouver les nombres les plus représentatifs ? 
+Pourquoi avons-nous besoin de trouver les chiffres les plus représentatifs ? 
 Vous souvenez-vous de la formule que nous utilisons 
 pour calculer la distance entre deux images ?
 
@@ -104,3 +101,33 @@ pour calculer la distance entre deux images ?
 Nous pouvons effectivement minimiser les valeurs des trois parties : 
 (R(p1) - R(p2))², (G(p1) - G(p2))² et (B(p1) - B(p2))², 
 afin de réduire au maximum la distance.
+
+Supposons que le nombre de couleurs soit de deux. 
+Nous aurons donc trois listes représentant R, G et B, et chaque 
+liste aura deux éléments représentant les chiffres les plus représentatifs 
+dans leurs histogrammes monochromes respectifs.
+
+Example:
+- List_R : 20, 40
+- List_G : 100, 150
+- List_B : 10, 60
+
+Pour trouver les couleurs les plus représentatives, 
+nous combinons les éléments des trois listes et sélectionnons 
+celle dont la distance est minimale. ***(La distance est calculée en faisant 
+la somme des distances entre cette couleur et la couleur de chaque pixel 
+de l'image.)***
+
+Une fois que nous avons trouvé les couleurs les plus représentatives, 
+il suffit de comparer la couleur de chaque pixel avec les couleurs de 
+la liste et d'écrire la couleur ayant la distance minimale dans la 
+nouvelle image.
+
+## Quelques pistes pour améliorer ma solution...?
+None...en fait, mon algorithme de base présente un problème, 
+car lors de la comparaison des couleurs, il est nécessaire de les comparer 
+individuellement en fonction des valeurs de R, G et B. Même si je
+choisis la couleur la plus représentative avec une valeur R identique
+à celle d'un pixel donné, si les valeurs de G et B sont élevées,
+la distance totale reste grande. En fin de compte, les trois
+solutions partielles optimales ne sont pas optimales globalement.
