@@ -13,12 +13,12 @@ public class Main_Perso {
 
     public static void main(String[] args) {
 
-
+        long start = System.currentTimeMillis();
         /*
         Lire l'image, initialisation.
          */
         String fichier = "originale.jpg";
-        int nb_couleurs = 20;
+        int nb_couleurs = 3;
         String file_name = "./bi_limite_"+nb_couleurs+".png";
 
         switch (args.length){
@@ -91,7 +91,7 @@ public class Main_Perso {
         Evalution
          */
         for(int fois = 0 ; fois < epoch ; fois++){
-            System.out.println("--Epoch"+fois+"--");
+//            System.out.println("--Epoch"+fois+"--");
 
             for(int index_x = 0; index_x < nb_couleurs ; index_x++){
                 //Red
@@ -155,7 +155,6 @@ public class Main_Perso {
 
         for(int x = 0; x < bi.getWidth();x++){
             for(int y = 0; y < bi.getHeight();y++){
-                System.out.println("image x:"+x+" y:"+y);
                 int[] rgb_bi = Outil.analyseRGB(bi.getRGB(x,y));
                 Color c_bi = new Color(rgb_bi[0],rgb_bi[1],rgb_bi[2]);
                 Color resultat = null;
@@ -181,6 +180,8 @@ public class Main_Perso {
             throw new RuntimeException(e);
         }
 
+        long end = System.currentTimeMillis();
+        System.out.println("Temps calculé: "+(end-start)+"ms");
     }
 
     /**
