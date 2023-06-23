@@ -57,7 +57,7 @@ public class KMeans {
             * Tant que le cout de l'iteration actuelle est inferieur au cout de l'ancienne iteration
             * et que le cout de l'ancienne iteration est different de 0 (pour la premiere iteration)
          */
-        while (old_cout >= cout || old_cout == 0) {
+        while (old_cout > cout || old_cout == 0) {
 
             // Initialisation Groupes
             for (Cluster c : clusters) {
@@ -128,7 +128,7 @@ public class KMeans {
 
         // Lecture de l'image
         try {
-            image = ImageIO.read(new File("resources/animaux/ours.png"));
+            image = ImageIO.read(new File("resources/animaux/perroquet_small.png"));
         } catch (IOException e) {
             System.out.println("Impossible de lire l'image");
             System.exit(1);
@@ -168,7 +168,7 @@ public class KMeans {
 
         // Ecriture de l'image
         try {
-            ImageIO.write(image, "png", new File("resources/out/ours.png"));
+            ImageIO.write(image, "png", new File("resources/out/perroquet_small.png"));
         } catch (IOException e) {
             System.out.println("Impossible d'écrire l'image");
             System.exit(1);
