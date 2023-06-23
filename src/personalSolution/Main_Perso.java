@@ -18,7 +18,7 @@ public class Main_Perso {
         Lire l'image, initialisation.
          */
         String fichier = "originale.jpg";
-        int nb_couleurs = 15;
+        int nb_couleurs = 20;
         String file_name = "./bi_limite_"+nb_couleurs+".png";
 
         switch (args.length){
@@ -76,7 +76,7 @@ public class Main_Perso {
         for(int i = 0; i < nb_couleurs; i++){
             x_reds.add(Outil.randomX(red_map, bi.getWidth(),bi.getHeight()));
             x_greens.add(Outil.randomX(green_map,bi.getWidth(),bi.getHeight()));
-            x_blues.add(Outil.randomX(green_map,bi.getWidth(),bi.getHeight()));
+            x_blues.add(Outil.randomX(blue_map,bi.getWidth(),bi.getHeight()));
         }
 
 

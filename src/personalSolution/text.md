@@ -12,17 +12,47 @@ et chercher la valeur minimale pour chaque partie.
 En ajoutant ces trois valeurs minimales, 
 le résultat final *Distance* devrait également être minimal.
 
+## Comment lancer le programme?
+
+le premier paramètre est le chemin du fichier d'entrée, 
+le deuxième paramètre est le nombre de couleurs, et le troisième 
+paramètre est le chemin du fichier de sortie.
+
+![rapport_1](../../resources/personalSolution/rapport/rapport_1.png)
+
 ## Algorithme:
-1.Tout d'abord, nous créons trois histogrammes, 
+
+1.Tout d'abord, nous créons trois histogrammes monochromes, 
 correspondant respectivement aux channels **R**, **G** et **B**,
 et les stockons dans des Maps.
 
 2.Remplir les Maps, 
 le nombre de pixels associés à chaque valeur de **R**, **G** ou **B**.
 
-3.Choisir aléatoirement **n** fois la valeur de x 
-en fonction du nombre de couleurs, et 
-les stocker dans une liste.
+3.Choisir aléatoirement **n** (nb de couleur) fois la valeur de x , et 
+les stocker dans trois listes pour les channels **R**, **G**, **B**.
+
+4.Utiliser la méthode de descente de gradient pour mettre à jour 
+les valeurs des x dans ces trois listes afin de trouver les chiffres
+les plus représentatifs.
+
+5.Effectuer des combinaisons sur les éléments des listes 
+R, G et B, puis sélectionner les **n** (nb de couleurs) combinaisons ayant les distances 
+les plus petites.
+
+6.La signification de combiner les éléments de ces trois listes 
+est que nous avons maintenant obtenu les couleurs 
+les plus représentatives (R, G, B) que nous stockons 
+dans une liste. Ensuite, il est facile : nous parcourons 
+chaque pixel de l'image et choisissons la couleur de la liste qui 
+est la plus proche de la couleur du pixel, puis nous appliquons 
+cette couleur à notre image de sortie.
+
+# Conception:
+
+![dia_classes](../../resources/personalSolution/rapport/classes.png)
+
+![dia_sequence](../../resources/personalSolution/rapport/sequence.png)
 
 Par exemple, dans le cas de deux couleurs, 
 **list_red** (dans Main_Perso c'est **x_reds**) contiendra deux valeurs aléatoires de x.
